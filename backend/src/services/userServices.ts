@@ -21,3 +21,32 @@ export async function register(user :IUser) : Promise<IUserModel>{
     
 }
 
+export async function login(credentials :{email : string , password : string}) : Promise<IUserModel>{
+    
+
+   const {email , password} = credentials;
+
+   try {
+    const user = await userDao.findOne({email});
+    console.log("email service : " , email);
+    console.log("password service : " , password);
+    console.log("User service : " , user);
+    
+    if(!user) {
+        throw new Error("Invalid credentials");
+    }
+    else {
+        const validPassword: Boolean = await bcrypt.compare(password , user.password);
+
+        if (validPassword) {
+            return user;
+        }else {
+            throw new Error("Invalid credentials");
+        }
+    }
+
+
+   } catch (error : any ) {
+        throw new Error (error.message);
+   }
+}
