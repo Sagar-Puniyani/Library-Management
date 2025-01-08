@@ -4,7 +4,7 @@ import {config} from '../config'
 
 import userDao, {IUserModel} from '../daos/userDaos';
 import {IUser} from '../models/user';
-import { unableToSaveError } from "../utils/LibraryError";
+import { unableToSaveError, InvalidCredentialsError } from "../utils/LibraryError";
 
 export async function register(user :IUser) : Promise<IUserModel>{ 
 
@@ -33,7 +33,7 @@ export async function login(credentials :{email : string , password : string}) :
     console.log("User service : " , user);
     
     if(!user) {
-        throw new Error("Invalid credentials");
+        throw new InvalidCredentialsError("Invalid credentials");
     }
     else {
         const validPassword: Boolean = await bcrypt.compare(password , user.password);
@@ -41,7 +41,7 @@ export async function login(credentials :{email : string , password : string}) :
         if (validPassword) {
             return user;
         }else {
-            throw new Error("Invalid credentials");
+            throw new InvalidCredentialsError("Invalid credentials");
         }
     }
 

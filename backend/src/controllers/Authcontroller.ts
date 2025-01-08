@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { login, register } from "../services/userServices";
 import { IUser } from "../models/user";
 import { IUserModel } from "../daos/userDaos";
+import { InvalidCredentialsError } from "../utils/LibraryError";
 
 async  function handleRegister(req: Request, res: Response) {
   try {
@@ -45,6 +46,12 @@ async function handleLogin(req: Request, res: Response) {
           },
       })
   } catch (error: any) {
+    // if (error instanceof InvalidCredentialsError ) {
+    //   return res.status(401).json({ message: error.message });
+    // }
+    // else {
+      
+    // }
     res.status(501).json({ message: "Unable to login user", error: error.message });
   }
 }

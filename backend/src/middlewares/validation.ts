@@ -23,6 +23,10 @@ export const schema = {
             lastName : joi.string().required(),
             email : joi.string().email().required(),
             password : joi.string().required()
+        }),
+        login : joi.object<{email : string , password : string}>({
+            email : joi.string().email().required(),
+            password : joi.string().required()
         })
     }
 }

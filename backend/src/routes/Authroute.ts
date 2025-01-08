@@ -6,7 +6,7 @@ import { ValidateSchema , schema } from "../middlewares/validation";
 const router = express.Router();
 
 router.post("/register", ValidateSchema(schema.user.create) , Authcontroller.handleRegister);
-router.post("/login",  Authcontroller.handleLogin);
+router.post("/login",  ValidateSchema(schema.user.login) ,Authcontroller.handleLogin);
 
 
 export = router;
