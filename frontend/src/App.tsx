@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './App.css'
 import HomePage from './pages/HomePage/HomePage';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import { RootState } from './redux/ReduxStore';
 
 function App() {
 
-  const [displayLogin , setDisplayLogin ] = useState<boolean>(true);
+  // const [displayLogin , setDisplayLogin ] = useState<boolean>(true);
   // const [loggedInUser , setLoggedInUser ] = useState<User>();
 
   // const upadateLoggedInUser = (user : User) => {
@@ -24,7 +24,7 @@ function App() {
   return (
     <>
     <div>
-      <HomePage displayLogin={displayLogin}  />
+      <HomePage   />
     </div>
     </>
   )
